@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="gestion_videothequeModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="adherents">
+    <Key>
+      <PropertyRef Name="CodeAdh" />
+    </Key>
+    <Property Name="CodeAdh" Type="Int32" Nullable="false" />
+    <Property Name="NomAdh" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="PrenomAdh" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Emprunts" Relationship="Self.FK__Emprunts__CodeAd__145C0A3F" FromRole="adherents" ToRole="Emprunts" />
+  </EntityType>
+  <EntityType Name="Emprunts">
+    <Key>
+      <PropertyRef Name="NumEmp" />
+    </Key>
+    <Property Name="NumEmp" Type="Int32" Nullable="false" />
+    <Property Name="CodeAdh" Type="Int32" />
+    <Property Name="CodeFilm" Type="Int32" />
+    <Property Name="DateEmp" Type="DateTime" Precision="0" />
+    <Property Name="DateRet" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="adherents" Relationship="Self.FK__Emprunts__CodeAd__145C0A3F" FromRole="Emprunts" ToRole="adherents" />
+    <NavigationProperty Name="Films" Relationship="Self.FK__Emprunts__CodeFi__15502E78" FromRole="Emprunts" ToRole="Films" />
+  </EntityType>
+  <EntityType Name="Films">
+    <Key>
+      <PropertyRef Name="CodeFilm" />
+    </Key>
+    <Property Name="CodeFilm" Type="Int32" Nullable="false" />
+    <Property Name="TitOuv" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="NomReal" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="TypeSup" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Disponible" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Emprunts" Relationship="Self.FK__Emprunts__CodeFi__15502E78" FromRole="Films" ToRole="Emprunts" />
+  </EntityType>
+  <Association Name="FK__Emprunts__CodeAd__145C0A3F">
+    <End Role="adherents" Type="Self.adherents" Multiplicity="0..1" />
+    <End Role="Emprunts" Type="Self.Emprunts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="adherents">
+        <PropertyRef Name="CodeAdh" />
+      </Principal>
+      <Dependent Role="Emprunts">
+        <PropertyRef Name="CodeAdh" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Emprunts__CodeFi__15502E78">
+    <End Role="Films" Type="Self.Films" Multiplicity="0..1" />
+    <End Role="Emprunts" Type="Self.Emprunts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Films">
+        <PropertyRef Name="CodeFilm" />
+      </Principal>
+      <Dependent Role="Emprunts">
+        <PropertyRef Name="CodeFilm" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="gestion_videothequeEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="adherents" EntityType="Self.adherents" />
+    <EntitySet Name="Emprunts" EntityType="Self.Emprunts" />
+    <EntitySet Name="Films" EntityType="Self.Films" />
+    <AssociationSet Name="FK__Emprunts__CodeAd__145C0A3F" Association="Self.FK__Emprunts__CodeAd__145C0A3F">
+      <End Role="adherents" EntitySet="adherents" />
+      <End Role="Emprunts" EntitySet="Emprunts" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Emprunts__CodeFi__15502E78" Association="Self.FK__Emprunts__CodeFi__15502E78">
+      <End Role="Films" EntitySet="Films" />
+      <End Role="Emprunts" EntitySet="Emprunts" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

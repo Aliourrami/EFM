@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="gestion_videothequeModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="adherents">
+    <Key>
+      <PropertyRef Name="CodeAdh" />
+    </Key>
+    <Property Name="CodeAdh" Type="int" Nullable="false" />
+    <Property Name="NomAdh" Type="varchar" MaxLength="20" />
+    <Property Name="PrenomAdh" Type="varchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="Emprunts">
+    <Key>
+      <PropertyRef Name="NumEmp" />
+    </Key>
+    <Property Name="NumEmp" Type="int" Nullable="false" />
+    <Property Name="CodeAdh" Type="int" />
+    <Property Name="CodeFilm" Type="int" />
+    <Property Name="DateEmp" Type="date" />
+    <Property Name="DateRet" Type="date" />
+  </EntityType>
+  <EntityType Name="Films">
+    <Key>
+      <PropertyRef Name="CodeFilm" />
+    </Key>
+    <Property Name="CodeFilm" Type="int" Nullable="false" />
+    <Property Name="TitOuv" Type="varchar" MaxLength="20" />
+    <Property Name="NomReal" Type="varchar" MaxLength="20" />
+    <Property Name="TypeSup" Type="varchar" MaxLength="20" />
+    <Property Name="Disponible" Type="varchar" MaxLength="1" />
+  </EntityType>
+  <Association Name="FK__Emprunts__CodeAd__145C0A3F">
+    <End Role="adherents" Type="Self.adherents" Multiplicity="0..1" />
+    <End Role="Emprunts" Type="Self.Emprunts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="adherents">
+        <PropertyRef Name="CodeAdh" />
+      </Principal>
+      <Dependent Role="Emprunts">
+        <PropertyRef Name="CodeAdh" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Emprunts__CodeFi__15502E78">
+    <End Role="Films" Type="Self.Films" Multiplicity="0..1" />
+    <End Role="Emprunts" Type="Self.Emprunts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Films">
+        <PropertyRef Name="CodeFilm" />
+      </Principal>
+      <Dependent Role="Emprunts">
+        <PropertyRef Name="CodeFilm" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="gestion_videothequeModelStoreContainer">
+    <EntitySet Name="adherents" EntityType="Self.adherents" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Emprunts" EntityType="Self.Emprunts" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Films" EntityType="Self.Films" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__Emprunts__CodeAd__145C0A3F" Association="Self.FK__Emprunts__CodeAd__145C0A3F">
+      <End Role="adherents" EntitySet="adherents" />
+      <End Role="Emprunts" EntitySet="Emprunts" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Emprunts__CodeFi__15502E78" Association="Self.FK__Emprunts__CodeFi__15502E78">
+      <End Role="Films" EntitySet="Films" />
+      <End Role="Emprunts" EntitySet="Emprunts" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

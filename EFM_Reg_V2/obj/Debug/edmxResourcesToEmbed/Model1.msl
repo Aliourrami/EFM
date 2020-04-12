@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="gestion_videothequeModelStoreContainer" CdmEntityContainer="gestion_videothequeEntities">
+    <EntitySetMapping Name="adherents">
+      <EntityTypeMapping TypeName="gestion_videothequeModel.adherents">
+        <MappingFragment StoreEntitySet="adherents">
+          <ScalarProperty Name="CodeAdh" ColumnName="CodeAdh" />
+          <ScalarProperty Name="NomAdh" ColumnName="NomAdh" />
+          <ScalarProperty Name="PrenomAdh" ColumnName="PrenomAdh" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Emprunts">
+      <EntityTypeMapping TypeName="gestion_videothequeModel.Emprunts">
+        <MappingFragment StoreEntitySet="Emprunts">
+          <ScalarProperty Name="NumEmp" ColumnName="NumEmp" />
+          <ScalarProperty Name="CodeAdh" ColumnName="CodeAdh" />
+          <ScalarProperty Name="CodeFilm" ColumnName="CodeFilm" />
+          <ScalarProperty Name="DateEmp" ColumnName="DateEmp" />
+          <ScalarProperty Name="DateRet" ColumnName="DateRet" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Films">
+      <EntityTypeMapping TypeName="gestion_videothequeModel.Films">
+        <MappingFragment StoreEntitySet="Films">
+          <ScalarProperty Name="CodeFilm" ColumnName="CodeFilm" />
+          <ScalarProperty Name="TitOuv" ColumnName="TitOuv" />
+          <ScalarProperty Name="NomReal" ColumnName="NomReal" />
+          <ScalarProperty Name="TypeSup" ColumnName="TypeSup" />
+          <ScalarProperty Name="Disponible" ColumnName="Disponible" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
